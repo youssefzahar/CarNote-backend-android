@@ -7,6 +7,8 @@ import dotenv from 'dotenv' ;
 
 import userRoutes from './Routes/UserRoutes.js'
 import productRoutes from './Routes/ProductRoutes.js'
+import carRoutes from './Routes/CarRoutes.js'
+import entretienRoutes from './Routes/EntretienRoutes.js'
 
 const app = express();
 const port = process.env.PORT || 9090;
@@ -37,6 +39,8 @@ app.set('view engine', 'ejs');
 
 app.use('/user',userRoutes)
 app.use('/product',productRoutes)
+app.use('/car',carRoutes)
+app.use('/entretien',entretienRoutes)
 
 
 app.listen(port, () => {

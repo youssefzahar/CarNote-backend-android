@@ -9,7 +9,6 @@ const userSchema = new Schema(
         },
         email : {
             type: String,
-            unique: true
         },
         password : {
             type: String,
@@ -22,7 +21,7 @@ const userSchema = new Schema(
         },
         isVerified : {
             type: Boolean,
-            default: false
+            default: true
         },
         active : {
             type: Boolean,

@@ -7,7 +7,7 @@ import multer from "../Middlewares/multer-config.js";
 const router = express.Router()
 
 router
-.route("/signin")/////////////////
+.route("/signin")///////////////////////////////////////////////////
 .post(signin)
 
 router
@@ -15,43 +15,45 @@ router
   .get(verifyAccount)
   
 router
-  .route("/profile")//////////////////
+  .route("/profile")///////////////////////////////////
   .get(
     protect,
     getuser
     )
 
 router
-  .route("/signup")//////////////////
-  .post(signup)
+  .route("/signup")////////////////////////////////////////////////////
+  .post(
+    multer("image", 512 * 1024),
+    signup)
 
 router
- .route("/update")///////////////////
+ .route("/update")
  .put(
   protect,
   updateUser
   );
 
 router
-  .route("/otpsend")
+  .route("/otpsend")///////////////////////////////////////////////////////////////
   .post(
     sendOTP
     )
 
 router
- .route("/resetPassword")////////////////
+ .route("/resetPassword")///////////////////////////////////////////////////////
  .put(
   resetPassword
   );
 
 router
-  .route("/verifyOTP")/////////////////
+  .route("/verifyOTP")//////////////////////////////////////////////////////////
   .post(
     verifyOTP
   );
 
 router
-  .route("/desactivateUser")////////////
+  .route("/desactivateUser")
   .put(
     protect,
     desactivateUser

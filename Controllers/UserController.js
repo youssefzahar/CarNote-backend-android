@@ -26,7 +26,15 @@ export async function signin (req,res) {
     const token = jwt.sign(payload,process.env.JWT_SECRET, {
         expiresIn: 60 * 60 * 24,
     });
-    res.status(200).json({success: true , token: token});
+    //res.status(200).json({success: true , token: token});
+   /* if(user.role == "user"){
+      console.log(token)
+      return*/ res.status(200).json({success: true , token: token});
+    /*}
+    if(user.role == "magasin"){
+      console.log("magasin") 
+      return res.status(201).json({success: true , token: token});
+    }*/
 }
 
 
@@ -41,7 +49,7 @@ res.status(200).json({user: user});
 
 export async function signup(req , res){
   try {
-      var { username , password, email, image, role } = req.body;
+      var { username , password, email } = req.body;
       var exists = await User.findOne({username});
       if (exists) {
           return res.status(403).json({error: "user exists !"});
@@ -53,8 +61,8 @@ export async function signup(req , res){
        password: encryptedPassword,
        otp: otp,
        email,
-       image,
-       role,
+       //role,
+       image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`
       });
     verificationMail(req,user)
      res.status(200).json({ message : "user added" });
@@ -66,8 +74,8 @@ export async function signup(req , res){
 
 export async function verifyAccount(req,res){
     try{
-        const email = req.query.email;
-        const user= await User.findOne({"email": email})
+       // const email = req.query.email;
+        const user= await User.findOne({"username": username})
         console.log(user);
         if(user){
             user.isVerified=true
@@ -207,7 +215,7 @@ export async function userimage(req, res) {
       }
     let newUser = {};
       newUser = {
-        image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`
+        image: `${req.file.filename}`
 
       }
     User.findByIdAndUpdate(req.user._id, newUser)
