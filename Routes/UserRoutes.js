@@ -24,7 +24,7 @@ router
 router
   .route("/signup")////////////////////////////////////////////////////
   .post(
-    multer("image", 512 * 1024),
+   // multer("image", 512 * 1024),
     signup)
 
 router

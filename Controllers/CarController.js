@@ -18,7 +18,7 @@ export async function addCar(req , res){
             description,
             date_circulation,
             owned_by,
-            image: `${req.file.filename}`
+           // image: `${req.file.filename}`
         });
        res.status(200).json({ message : "car added" });
       } catch (err) {
@@ -49,4 +49,33 @@ export async function carsForSale(req, res) {
     .catch(err => {
       res.status(500).json({ error: err })
     })
+}
+
+
+export async function updatecar(req, res) {
+  try {
+      var _id=req.body._id;
+      const car = await Car.findById(_id);
+      var description=req.body.description;
+      var date_circulation=req.body.date_circulation;
+      car.description=description;
+      car.date_circulation=date_circulation;
+      car.save();
+      res.status(200).json( {message : "car updated" })
+    } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export async function deleteCar(req, res) {
+
+  var _id = req.body._id
+  Car.findByIdAndDelete(_id)
+  .then(() => {
+    res.status(200).json({ message:"car deleted" });
+  })
+  .catch(err => {
+    res.status(500).json({ error: err })
+  })
 }

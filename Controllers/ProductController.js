@@ -18,7 +18,7 @@ export async function addProduct(req , res){
             prix,
             owned_by,
             description,
-            image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`
+           // image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`
         });
     
        res.status(200).json({ message : "product added" });
@@ -28,18 +28,16 @@ export async function addProduct(req , res){
 }
 
 export async function updateProduct(req, res) {
-    if(!req.user){
-      return res.status('401').json({error: "You're not authenticated!"});
-      }
+
+  var _id = req.body._id
     let newProduct = {};
     newProduct = {
-        title: req.body.title,
         stock: req.body.stock,
         prix: req.body.prix,
         description: req.body.description,
-        image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`,
+      //  image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`,
       }
-    Product.findByIdAndUpdate(req.body.productId, newProduct)
+    Product.findByIdAndUpdate(_id, newProduct)
     .then(() => {
       res.status(200).json({ message:"product modified" });
     })
@@ -50,11 +48,9 @@ export async function updateProduct(req, res) {
 
 
 export async function deleteProduct(req, res) {
-    if(!req.user){
-      return res.status('401').json({error: "You're not authenticated!"});
-      }
-    var productID = req.body.productID
-    Product.findByIdAndDelete(productID)
+
+    var _id = req.body._id
+    Product.findByIdAndDelete(_id)
     .then(() => {
       res.status(200).json({ message:"product deleted" });
     })
@@ -75,4 +71,15 @@ export async function usersProducts(req, res) {
     .catch(err => {
       res.status(500).json({ error: err })
     })
+}
+
+export async function getAllProducts(req, res) {
+
+  Product.find()
+  .then((products) => {
+    res.status(200).json({products});
+  })
+  .catch(err => {
+    res.status(500).json({ error: err })
+  })
 }

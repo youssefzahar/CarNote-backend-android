@@ -1,5 +1,5 @@
 import express from "express";
-import { addCar, userCars, carsForSale } from "../Controllers/CarController.js";
+import { addCar, userCars, carsForSale, deleteCar, updatecar } from "../Controllers/CarController.js";
 import protect from "../Middlewares/autorization.js";
 import { get } from "mongoose";
 import multer from "../Middlewares/multer-config.js";
@@ -30,6 +30,17 @@ router
       carsForSale
     )
 
+    router
+    .route("/deleteCar")
+    .post(
+      deleteCar
+    )
+
+    router
+    .route("/updatecar")
+    .put(
+      updatecar
+    )
 
 
 export default router;

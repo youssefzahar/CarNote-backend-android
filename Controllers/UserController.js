@@ -27,14 +27,14 @@ export async function signin (req,res) {
         expiresIn: 60 * 60 * 24,
     });
     //res.status(200).json({success: true , token: token});
-   /* if(user.role == "user"){
+    if(user.role == "User"){
       console.log(token)
-      return*/ res.status(200).json({success: true , token: token});
-    /*}
-    if(user.role == "magasin"){
+      return res.status(200).json({success: true , token: token});
+    }
+    if(user.role == "Shop"){
       console.log("magasin") 
       return res.status(201).json({success: true , token: token});
-    }*/
+    }
 }
 
 
@@ -49,7 +49,7 @@ res.status(200).json({user: user});
 
 export async function signup(req , res){
   try {
-      var { username , password, email } = req.body;
+      var { username , password, email, role } = req.body;
       var exists = await User.findOne({username});
       if (exists) {
           return res.status(403).json({error: "user exists !"});
@@ -61,8 +61,8 @@ export async function signup(req , res){
        password: encryptedPassword,
        otp: otp,
        email,
-       //role,
-       image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`
+       role,
+      // image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`
       });
     verificationMail(req,user)
      res.status(200).json({ message : "user added" });
