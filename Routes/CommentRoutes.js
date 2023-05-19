@@ -18,6 +18,7 @@ router.route("/getAll/:idProduct").get(getAll);
       router
     .route("/deleteAllComment")
     .delete(
+      protect,
       deleteAllComment
       )
 

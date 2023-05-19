@@ -40,6 +40,7 @@ export async function usersEntretiens(req, res) {
       return res.status('401').json({error: "You're not authenticated!"});
       }
     Entretien.find({owned_by: req.user._id})
+    .sort({ date: 1 })
     .then((entretien) => {
       res.status(200).json({entretien});
     })

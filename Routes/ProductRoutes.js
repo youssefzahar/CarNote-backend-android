@@ -10,7 +10,7 @@ const router = express.Router()
 router
   .route("/addProduct")//////////////////
   .post(
- //   multer("image", 512 * 1024),
+    multer("image", 512 * 1024),
     protect,
     addProduct
     )
@@ -19,12 +19,14 @@ router
   .route("/updateProduct")//////////////////
   .put(
   //  multer("image", 512 * 1024),
+  protect,
     updateProduct
     )
 
 router
   .route("/deleteProduct")//////////////////
   .post(
+    protect,
    deleteProduct
    )
 

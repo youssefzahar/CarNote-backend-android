@@ -18,10 +18,11 @@ const userSchema = new Schema(
         },
         image : {
             type: String,
+            default: 'userimage.png'
         },
         isVerified : {
             type: Boolean,
-            default: false
+            default: true
         },
         active : {
             type: Boolean,

@@ -18,7 +18,7 @@ export async function addProduct(req , res){
             prix,
             owned_by,
             description,
-           // image: `${req.protocol}://${req.get("host")}/img/${req.file.filename}`
+            image: `${req.file.filename}`
         });
     
        res.status(200).json({ message : "product added" });
@@ -28,8 +28,15 @@ export async function addProduct(req , res){
 }
 
 export async function updateProduct(req, res) {
+  if(!req.user){
+    return res.status(401).json({error: "You're not authenticated!"});
+    }
+    var _id = req.body._id
+    const product = await Product.findById(_id);
+  if(req.user != product.owned_by){
+    return res.status(402).json({error: "You're not Allowed!"});
+    }
 
-  var _id = req.body._id
     let newProduct = {};
     newProduct = {
         stock: req.body.stock,
@@ -49,8 +56,14 @@ export async function updateProduct(req, res) {
 
 export async function deleteProduct(req, res) {
 
+  if(!req.user){
+    return res.status(401).json({error: "You're not authenticated!"});
+    }
     var _id = req.body._id
-    Product.findByIdAndDelete(_id)
+    const product = await Product.findById(_id);
+  if(req.user != product.owned_by){
+    return res.status(402).json({error: "You're not Allowed!"});
+    }    Product.findByIdAndDelete(_id)
     .then(() => {
       res.status(200).json({ message:"product deleted" });
     })

@@ -54,8 +54,16 @@ export async function carsForSale(req, res) {
 
 export async function updatecar(req, res) {
   try {
+
+    if(!req.user){
+      return res.status(401).json({error: "You're not authenticated!"});
+      }
       var _id=req.body._id;
       const car = await Car.findById(_id);
+    if(req.user != car.owned_by){
+      return res.status(402).json({error: "You're not Allowed!"});
+      }
+
       var description=req.body.description;
       var date_circulation=req.body.date_circulation;
       car.description=description;
@@ -69,8 +77,15 @@ export async function updatecar(req, res) {
 
 
 export async function deleteCar(req, res) {
-
+  if(!req.user){
+    return res.status(401).json({error: "You're not authenticated!"});
+    }
+    
   var _id = req.body._id
+  const car = await Car.findById(_id);
+  if(req.user != car.owned_by){
+    return res.status(402).json({error: "You're not Allowed!"});
+    }
   Car.findByIdAndDelete(_id)
   .then(() => {
     res.status(200).json({ message:"car deleted" });

@@ -43,10 +43,18 @@ export async function getAll(req, res) {
   
 
 export async function deleteAllComment (req, res)  {
-    Comment.remove({}, function (err) {
-        if (err) {
-            return handleError(res, err)
-        }
-        return res.status(204).send({ message: "Aucun element" })
+  if(!req.user){
+    return res.status(401).json({error: "You're not authenticated!"});
+    }
+    var _id = req.body._id
+    const comment = await Comment.findById(_id);
+  if(req.user != comment.idUser){
+    return res.status(402).json({error: "You're not Allowed!"});
+    }    Comment.findByIdAndDelete(_id)
+    .then(() => {
+      res.status(200).json({ message:"comment deleted" });
+    })
+    .catch(err => {
+      res.status(500).json({ error: err })
     })
 }

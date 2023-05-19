@@ -11,6 +11,7 @@ const router = express.Router()
 router
   .route("/addcar")
   .post(
+    protect,
     multer("image", 512 * 1024),
     addCar
     )
@@ -32,12 +33,14 @@ router
     router
     .route("/deleteCar")
     .post(
+      protect,
       deleteCar
     )
 
     router
     .route("/updatecar")
     .put(
+      protect,
       updatecar
     )
 
