@@ -210,10 +210,10 @@ export async function sendactivationmail(req , res){
 }
 
 export async function userimage(req, res) {
-    if(!req.user){
-      return res.status('401').json({error: "You're not authenticated!"});
-      }
-    let newUser = {};
+  if(!req.user){
+    return res.status('401').json({error: "You're not authenticated!"});
+    }
+      let newUser = {};
       newUser = {
         image: `${req.file.filename}`
 

@@ -9,9 +9,8 @@ const router = express.Router()
 
 
 router
-  .route("/addcar")//////////////////
+  .route("/addcar")
   .post(
-    protect,
     multer("image", 512 * 1024),
     addCar
     )

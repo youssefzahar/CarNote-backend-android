@@ -73,9 +73,9 @@ router
 
 router
   .route("/userimage")///////////////////
-  .put(
-    multer("image", 512 * 1024),
+  .post(
     protect,
+    multer("image", 512 * 1024),
     userimage
   );
     

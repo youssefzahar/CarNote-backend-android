@@ -18,7 +18,7 @@ export async function addCar(req , res){
             description,
             date_circulation,
             owned_by,
-           // image: `${req.file.filename}`
+            image: `${req.file.filename}`
         });
        res.status(200).json({ message : "car added" });
       } catch (err) {

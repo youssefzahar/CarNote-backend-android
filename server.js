@@ -5,11 +5,11 @@ import cors from 'cors';
 import { errorHandler } from './Middlewares/error-handler.js';
 import dotenv from 'dotenv' ;
 
-import userRoutes from './Routes/UserRoutes.js';
-import productRoutes from './Routes/ProductRoutes.js';
-import carRoutes from './Routes/CarRoutes.js';
-import entretienRoutes from './Routes/EntretienRoutes.js';
-import PaymentRoutes from './Routes/PaymentRoutes.js';
+import userRoutes from './Routes/UserRoutes.js'
+import productRoutes from './Routes/ProductRoutes.js'
+import carRoutes from './Routes/CarRoutes.js'
+import entretienRoutes from './Routes/EntretienRoutes.js'
+import commentRoutes from './Routes/CommentRoutes.js'
 
 const app = express();
 const port = process.env.PORT || 9090;
@@ -42,8 +42,7 @@ app.use('/user',userRoutes)
 app.use('/product',productRoutes)
 app.use('/car',carRoutes)
 app.use('/entretien',entretienRoutes)
-app.use('/payment',PaymentRoutes)
-
+app.use('/comment', commentRoutes)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
