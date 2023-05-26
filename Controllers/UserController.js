@@ -24,7 +24,7 @@ export async function signin (req,res) {
     }
     const payload = {id:user.id};
     const token = jwt.sign(payload,process.env.JWT_SECRET, {
-        expiresIn: 60 * 60 * 24,
+        expiresIn: 60 * 60 * 9999,
     });
     //res.status(200).json({success: true , token: token});
     if(user.role == "User"){
