@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import mailer from "nodemailer"
 import hbs from "nodemailer-express-handlebars"
 import path from "path";
-
+ 
 
 export async function verificationMail(req,user){
     var from = "Codemagicien team"
