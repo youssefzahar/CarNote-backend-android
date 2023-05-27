@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import otpGenerator from "otp-generator";
 
-import { verificationMail, forgotpasswordMail, activationMail } from "../middlewares/nodemail.js";
+import { verificationMail, forgotpasswordMail, activationMail } from "../Middlewares/nodemail.js";
 
 
 export async function signin (req,res) {
