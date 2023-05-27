@@ -27,7 +27,7 @@ const carSchema = new Schema({
     },
     image: {
         type: String,
-        default: "1680093914781.jpg"
+        default: "car.jpg"
     },
     date_circulation: {
         type: String

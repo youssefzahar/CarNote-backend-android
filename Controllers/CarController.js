@@ -8,8 +8,11 @@ export async function addCar(req , res){
         if(!req.user){
             return res.status(401).json({error: "You're not authenticated!"});
             }
-        var { modele , marque, puissance, carburant, description, date_circulation, owned_by } = req.body;
+        var { modele , marque, puissance, carburant, description, date_circulation, owned_by, image } = req.body;
         owned_by = req.user._id;
+        if(req.file){
+          image = req.file.filename;
+        }
         var car = await Car.create({
             modele,
             marque,
@@ -18,7 +21,7 @@ export async function addCar(req , res){
             description,
             date_circulation,
             owned_by,
-            image: `${req.file.filename}`
+            image
         });
        res.status(200).json({ message : "car added" });
       } catch (err) {

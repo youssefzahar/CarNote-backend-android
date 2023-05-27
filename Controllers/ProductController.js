@@ -6,7 +6,7 @@ export async function addProduct(req , res){
         if(!req.user){
             return res.status(401).json({error: "You're not authenticated!"});
             }
-        var { title , stock, prix, description, owned_by } = req.body;
+        var { title , stock, prix, description, owned_by, image } = req.body;
         owned_by = req.user._id;
         var exists = await Product.findOne({title});
         if (exists) {

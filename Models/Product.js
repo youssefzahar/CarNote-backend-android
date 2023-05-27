@@ -19,7 +19,8 @@ const productSchema = new Schema({
         ref: 'User'
     },
     image: {
-        type: String
+        type: String,
+        default: 'product.jpg'
     }
 }, {timestamps: true} )
 
